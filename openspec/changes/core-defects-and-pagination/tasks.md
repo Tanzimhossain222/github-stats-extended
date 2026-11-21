@@ -8,9 +8,9 @@
 
 ## 2. WakaTime SSRF Defense (PR 2 Candidate)
 
-- [ ] 2.1 Add domain sanitization in `packages/core/src/fetchers/wakatime.ts` that validates `api_domain` against a valid FQDN pattern and rejects private, loopback, and link-local IP addresses (`127.0.0.1`, `169.254.169.254`, `10.0.0.0/8`, `192.168.0.0/16`, `172.16.0.0/12`).
-- [ ] 2.2 Add unit tests in `packages/core/tests/fetchWakatime.test.ts` verifying that invalid or private domains are rejected with `CustomError`.
-- [ ] 2.3 Verify test suite passes with `pnpm test`.
+- [x] 2.1 Add domain sanitization in `packages/core/src/fetchers/wakatime.ts` that validates `api_domain` against a valid FQDN pattern and rejects private, loopback, and link-local IP addresses (`127.0.0.1`, `169.254.169.254`, `10.0.0.0/8`, `192.168.0.0/16`, `172.16.0.0/12`).
+- [x] 2.2 Add unit tests in `packages/core/tests/fetchWakatime.test.ts` verifying that invalid or private domains are rejected with `CustomError`.
+- [x] 2.3 Verify test suite passes with `pnpm test`.
 
 ## 3. Top Languages GraphQL Pagination & Recency Ordering (PR 3 Candidate)
 
