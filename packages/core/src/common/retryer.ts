@@ -142,10 +142,19 @@ const retryer = async <TData = unknown, TVariables = Record<string, unknown>>(
       }
 
       // also checking for bad credentials if any tokens gets invalidated
-      const message = e.response.data.message;
+      const status = e.response.status;
+      const message = e.response.data.message ?? "";
       const isBadCredential = message === "Bad credentials";
       const isAccountSuspended =
         message === "Sorry. Your account was suspended.";
+      const isRestRateLimited =
+        status === 429 || (status === 403 && /rate limit/i.test(message));
+
+      if (isRestRateLimited) {
+        hasRateLimited = true;
+        logger.log(`${currentPAT.name} Failed due to rate limiting`);
+        continue;
+      }
 
       if (!isBadCredential && !isAccountSuspended) {
         // HTTP error with a response → return it for caller-side handling
