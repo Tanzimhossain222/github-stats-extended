@@ -32,5 +32,5 @@
 
 ## 5. End-to-End Verification & Upstream Preparation
 
-- [ ] 5.1 Run root linting, type-checking, and full test suite (`pnpm lint`, `pnpm typecheck`, `pnpm test`).
-- [ ] 5.2 Validate that all four proposed changes can be isolated into atomic git branches for clean upstream pull requests.
+- [x] 5.1 Run root linting, type-checking, and full test suite (`pnpm lint`, `pnpm typecheck`, `pnpm test`).
+- [x] 5.2 Validate that all four proposed changes can be isolated into atomic git branches for clean upstream pull requests.
