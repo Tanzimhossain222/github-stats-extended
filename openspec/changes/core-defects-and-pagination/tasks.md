@@ -14,14 +14,14 @@
 
 ## 3. Top Languages GraphQL Pagination & Recency Ordering (PR 3 Candidate)
 
-- [ ] 3.1 Update `packages/core/src/graphql/queries/top-languages.graphql` to accept `$after: String`, add `orderBy: { field: PUSHED_AT, direction: DESC }`, add `pageInfo { hasNextPage, endCursor }`, and add `nameWithOwner`.
-- [ ] 3.2 Regenerate GraphQL TypeScript artifacts via `pnpm generate-graphql-types` and verify with `pnpm check-graphql-types`.
-- [ ] 3.3 Add `FETCH_MULTI_PAGE_LANGS` config option to `packages/core/src/common/config.ts` (defaulting to 3 pages).
-- [ ] 3.4 Refactor `fetchTopLanguages` in `packages/core/src/fetchers/top-languages.ts` to implement cursor pagination while `hasNextPage && pageCount < maxPages`.
-- [ ] 3.5 Replace the $O(N^2)$ `edges.concat(acc)` array allocation pattern in `fetchTopLanguages` with a direct linear iteration loop.
-- [ ] 3.6 Update repository exclusion logic in `fetchTopLanguages` to match both bare `node.name` and namespaced `nameWithOwner`.
-- [ ] 3.7 Add tests in `packages/core/tests/fetchTopLanguages.test.ts` simulating multi-page GraphQL responses and validating that languages from subsequent pages are accumulated without loss.
-- [ ] 3.8 Update documentation in `apps/frontend/src/content/docs/docs/cards/top-languages.md` to accurately reflect the paginated limit and ordering behavior.
+- [x] 3.1 Update `packages/core/src/graphql/queries/top-languages.graphql` to accept `$after: String`, add `orderBy: { field: PUSHED_AT, direction: DESC }`, add `pageInfo { hasNextPage, endCursor }`, and add `nameWithOwner`.
+- [x] 3.2 Regenerate GraphQL TypeScript artifacts via `pnpm generate-graphql-types` and verify with `pnpm check-graphql-types`.
+- [x] 3.3 Add `FETCH_MULTI_PAGE_LANGS` config option to `packages/core/src/common/config.ts` (defaulting to 3 pages).
+- [x] 3.4 Refactor `fetchTopLanguages` in `packages/core/src/fetchers/top-languages.ts` to implement cursor pagination while `hasNextPage && pageCount < maxPages`.
+- [x] 3.5 Replace the $O(N^2)$ `edges.concat(acc)` array allocation pattern in `fetchTopLanguages` with a direct linear iteration loop.
+- [x] 3.6 Update repository exclusion logic in `fetchTopLanguages` to match both bare `node.name` and namespaced `nameWithOwner`.
+- [x] 3.7 Add tests in `packages/core/tests/fetchTopLanguages.test.ts` simulating multi-page GraphQL responses and validating that languages from subsequent pages are accumulated without loss.
+- [x] 3.8 Update documentation in `apps/frontend/src/content/docs/docs/cards/top-languages.md` to accurately reflect the paginated limit and ordering behavior.
 
 ## 4. Backend Resilience & Error Handling Fixes (PR 4 Candidate)
 
