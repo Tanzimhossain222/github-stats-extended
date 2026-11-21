@@ -22,6 +22,8 @@ const SECONDARY_ERROR_MESSAGES = {
   )}`,
   INVALID_API_DOMAIN:
     "Make sure the provided api_domain is a valid public domain name",
+  BAD_CREDENTIALS:
+    "Please check that your GitHub API token is valid and not expired",
 };
 
 /**
@@ -53,6 +55,7 @@ class CustomError extends Error {
   static WAKATIME_ERROR = "WAKATIME_ERROR";
   static INVALID_AFFILIATION = "INVALID_AFFILIATION";
   static INVALID_API_DOMAIN = "INVALID_API_DOMAIN";
+  static BAD_CREDENTIALS = "BAD_CREDENTIALS";
 }
 
 /**

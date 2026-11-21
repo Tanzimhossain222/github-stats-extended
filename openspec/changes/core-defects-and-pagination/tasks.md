@@ -25,10 +25,10 @@
 
 ## 4. Backend Resilience & Error Handling Fixes (PR 4 Candidate)
 
-- [ ] 4.1 Fix Express error handling in `apps/backend/api/delete-user.js` by adding an explicit `return` in the `catch` block to prevent double-send `ERR_HTTP_HEADERS_SENT` exceptions.
-- [ ] 4.2 Fix token error classification in `packages/core/src/common/retryer.ts` so that authentication rejections (`Bad credentials`) throw an authentication-specific error rather than generic rate-limiting downtime.
-- [ ] 4.3 Normalize URL joining in `apps/backend/src/repeatRequests.js` to strip leading/trailing slashes and duplicate protocol schemes.
-- [ ] 4.4 Run backend test suite via `pnpm --filter ./apps/backend test` and verify passing status.
+- [x] 4.1 Fix Express error handling in `apps/backend/api/delete-user.js` by adding an explicit `return` in the `catch` block to prevent double-send `ERR_HTTP_HEADERS_SENT` exceptions.
+- [x] 4.2 Fix token error classification in `packages/core/src/common/retryer.ts` so that authentication rejections (`Bad credentials`) throw an authentication-specific error rather than generic rate-limiting downtime.
+- [x] 4.3 Normalize URL joining in `apps/backend/src/repeatRequests.js` to strip leading/trailing slashes and duplicate protocol schemes.
+- [x] 4.4 Run backend test suite via `pnpm --filter ./apps/backend test` and verify passing status.
 
 ## 5. End-to-End Verification & Upstream Preparation
 
