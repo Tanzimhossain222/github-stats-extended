@@ -2,9 +2,9 @@
 
 ## 1. Security & Entity Encoding Fix (PR 1 Candidate)
 
-- [ ] 1.1 Update `encodeHTML` in `packages/core/src/common/html.ts` to remove the faulty `(?!#)` negative lookahead and unconditionally encode XML/HTML special characters (`<`, `>`, `&`, `"`, `'`).
-- [ ] 1.2 Add unit test cases in `packages/core/tests/html.test.ts` and `packages/core/tests/xss.test.js` for payloads containing `<#script>`, `"# onfocus=`, and single-quote breakouts.
-- [ ] 1.3 Verify existing card rendering tests with `pnpm --filter @stats-organization/github-readme-stats-core test`.
+- [x] 1.1 Update `encodeHTML` in `packages/core/src/common/html.ts` to remove the faulty `(?!#)` negative lookahead and unconditionally encode XML/HTML special characters (`<`, `>`, `&`, `"`, `'`).
+- [x] 1.2 Add unit test cases in `packages/core/tests/html.test.ts` and `packages/core/tests/xss.test.js` for payloads containing `<#script>`, `"# onfocus=`, and single-quote breakouts.
+- [x] 1.3 Verify existing card rendering tests with `pnpm --filter @stats-organization/github-readme-stats-core test`.
 
 ## 2. WakaTime SSRF Defense (PR 2 Candidate)
 
