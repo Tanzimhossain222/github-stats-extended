@@ -37,6 +37,7 @@ You can customize the appearance and behavior of the top languages card using th
 | `layout`                        | Switches between five available layouts `normal` & `compact` & `donut` & `donut-vertical` & `pie`.                                                                                              | enum                            | `normal`                                            |
 | `card_width`                    | Sets the card's width manually.                                                                                                                                                                 | number                          | `300`                                               |
 | `langs_count`                   | Shows more languages on the card, between 1-20.                                                                                                                                                 | integer                         | `5` for `normal` and `donut`, `6` for other layouts |
+| `min_percent`                   | Filters out micro-languages below a percentage threshold (e.g. `0.1` or `1`). Disabled by default (`null`).                                                      | number                          | `null`                                              |
 | `exclude_repo`                  | Excludes specified repositories.                                                                                                                                                                | string (comma-separated values) | `null`                                              |
 | `role`                          | Include repositories where the user has one of the specified [roles](https://docs.github.com/en/graphql/reference/repos#enum-repositoryaffiliation) (OWNER, ORGANIZATION_MEMBER, COLLABORATOR). | string (comma-separated values) | `OWNER`                                             |
 | `custom_title`                  | Sets a custom title for the card.                                                                                                                                                               | string                          | `Most Used Languages`                               |
@@ -101,6 +102,16 @@ You can use the `&langs_count=` option to increase or decrease the number of lan
 
 ```md
 ![Top Langs](https://github-stats-extended.vercel.app/api/top-langs/?username=anuraghazra&langs_count=8)
+```
+
+## Minimum percentage threshold
+
+You can use the `&min_percent=` option to filter out micro-languages below a percentage threshold (e.g. `&min_percent=0.1` or `&min_percent=1`).
+
+By default, this option is disabled (`null`), meaning all languages are displayed without any threshold restriction up to `langs_count`. If you have tiny configuration files or one-off scripts (such as Dockerfile at 0.04% or Lua at 0.01%) taking up card slots, setting a small threshold like `&min_percent=0.1` will trim them while preserving your real programming languages (like C++, C, or Shell).
+
+```md
+![Top Langs](https://github-stats-extended.vercel.app/api/top-langs/?username=anuraghazra&min_percent=0.1)
 ```
 
 ## Compact Language Card Layout
