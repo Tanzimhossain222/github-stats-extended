@@ -367,6 +367,11 @@ const renderRepoCard = (
     `,
   });
 
+  card.setAccessibilityLabel({
+    title: card.title,
+    desc: `${desc}. Language: ${langName}, Stars: ${totalStars}, Forks: ${totalForks}`,
+  });
+
   return card.render(`
     ${
       isTemplate

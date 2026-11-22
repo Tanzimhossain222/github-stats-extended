@@ -42,6 +42,7 @@ interface TopLangOptions extends CommonCardOptions {
   hide_values: boolean;
   prog_bar_bg_color: string;
   stats_format: "percentages" | "bytes";
+  min_percent?: number;
 }
 
 /**
@@ -198,12 +199,14 @@ const donutCenterTranslation = (totalLangs: number): number => {
  * @param topLangs Top languages.
  * @param langs_count Number of languages to show.
  * @param hide Languages to hide.
+ * @param min_percent Minimum percentage threshold to filter out noise.
  * @returns Trimmed top languages and total size.
  */
 const trimTopLanguages = (
   topLangs: TopLangData,
   langs_count: number,
   hide?: Array<string>,
+  min_percent?: number,
 ): { langs: Array<Lang>; totalLanguageSize: number } => {
   let langs = Object.values(topLangs);
   const langsToHide: Record<string, boolean> = {};
@@ -219,8 +222,17 @@ const trimTopLanguages = (
   // filter out languages to be hidden
   langs = langs
     .sort((a, b) => b.size - a.size)
-    .filter((lang) => !langsToHide[lowercaseTrim(lang.name)])
-    .slice(0, langsCount);
+    .filter((lang) => !langsToHide[lowercaseTrim(lang.name)]);
+
+  // filter by min_percent threshold if specified
+  const initialTotalSize = langs.reduce((acc, curr) => acc + curr.size, 0);
+  if (min_percent !== undefined && min_percent > 0 && initialTotalSize > 0) {
+    langs = langs.filter(
+      (lang) => (lang.size / initialTotalSize) * 100 >= min_percent,
+    );
+  }
+
+  langs = langs.slice(0, langsCount);
 
   const totalLanguageSize = langs.reduce((acc, curr) => acc + curr.size, 0);
 
@@ -929,6 +941,7 @@ const renderTopLanguages = (
     border_radius,
     disable_animations,
     stats_format = "percentages",
+    min_percent,
   } = options;
 
   const i18n = new I18n({
@@ -940,6 +953,7 @@ const renderTopLanguages = (
     topLangs,
     langs_count,
     hide,
+    min_percent,
   );
 
   let width = card_width
@@ -1070,6 +1084,21 @@ const renderTopLanguages = (
       .lang-name { fill: ${textColor}; }
       .progress-background { fill: ${progBarBgColor}; }
     `,
+  });
+
+  const a11yDesc =
+    langs.length === 0 || totalLanguageSize <= 0
+      ? i18n.t("langcard.nodata")
+      : langs
+          .map((lang) => {
+            const percent = (lang.size / totalLanguageSize) * 100;
+            return `${lang.name} ${getDisplayValue(lang.size, percent, stats_format)}`;
+          })
+          .join(", ");
+
+  card.setAccessibilityLabel({
+    title: card.title,
+    desc: a11yDesc,
   });
 
   if (layout === "pie" || layout === "donut-vertical") {

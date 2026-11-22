@@ -281,6 +281,19 @@ describe("test renderGistCard", () => {
     const styles = document.querySelector("style")?.textContent ?? "";
     expect(styles).toContain("animation-duration: 0s !important");
   });
+
+  it("should render WCAG accessibility title and desc labels", () => {
+    document.body.innerHTML = renderGistCard(data);
+
+    const title = document.querySelector("title#titleId");
+    const desc = document.querySelector("desc#descId");
+    expect(title).toBeInTheDocument();
+    expect(title?.textContent).toBe("test");
+    expect(desc).toBeInTheDocument();
+    expect(desc?.textContent).toContain("Language: Python");
+    expect(desc?.textContent).toContain("Stars: 163");
+    expect(desc?.textContent).toContain("Forks: 19");
+  });
 });
 
 describe("test gist API", () => {

@@ -240,6 +240,10 @@ exports[`Test /api contract > should match the gradient-background response snap
       "Content-Type",
       "image/svg+xml",
     ],
+    [
+      "ETag",
+      ""89bc14f52acb7cdfa84e11769b23d16b"",
+    ],
   ],
 }
 `;
@@ -471,6 +475,10 @@ exports[`Test /api contract > should match the public happy-path response snapsh
     [
       "Content-Type",
       "image/svg+xml",
+    ],
+    [
+      "ETag",
+      ""30b0cca7bea681dc59702201798f6c52"",
     ],
   ],
 }
@@ -708,6 +716,10 @@ exports[`Test /api contract > should match the public many-params response snaps
     [
       "Content-Type",
       "image/svg+xml",
+    ],
+    [
+      "ETag",
+      ""936aad1abebcbe84459d78e36524d8d8"",
     ],
   ],
 }

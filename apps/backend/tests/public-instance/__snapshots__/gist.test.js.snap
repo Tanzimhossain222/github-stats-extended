@@ -31,8 +31,8 @@ exports[`Test /api/gist contract > should match the private missing-id response 
 exports[`Test /api/gist contract > should match the public happy-path response snapshot 1`] = `
 {
   "content": "<svg width="400" height="180" viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="descId">
-        <title id="titleId"/>
-        <desc id="descId"/>
+        <title id="titleId">countries.json</title>
+        <desc id="descId">List of countries and territories in English and Spanish: name, continent, capital, dial code, country codes, TLD, and area in sq km. Lista de países y territorios en Inglés y Español: nombre, continente, capital, código de teléfono, códigos de país, dominio y área en km cuadrados. Updated 2023. Language: JSON, Stars: 33, Forks: 11</desc>
         <style>
           .header {
             font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif;
@@ -130,6 +130,10 @@ exports[`Test /api/gist contract > should match the public happy-path response s
       "Content-Type",
       "image/svg+xml",
     ],
+    [
+      "ETag",
+      ""c4cda5393aa897647258d424b9b3ca4c"",
+    ],
   ],
 }
 `;
@@ -137,8 +141,8 @@ exports[`Test /api/gist contract > should match the public happy-path response s
 exports[`Test /api/gist contract > should match the public many-params response snapshot 1`] = `
 {
   "content": "<svg width="400" height="180" viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="descId">
-        <title id="titleId"/>
-        <desc id="descId"/>
+        <title id="titleId">Yizack/countries.json</title>
+        <desc id="descId">List of countries and territories in English and Spanish: name, continent, capital, dial code, country codes, TLD, and area in sq km. Lista de países y territorios en Inglés y Español: nombre, continente, capital, código de teléfono, códigos de país, dominio y área en km cuadrados. Updated 2023. Language: JSON, Stars: 33, Forks: 11</desc>
         <style>
           .header {
             font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif;
@@ -248,6 +252,10 @@ exports[`Test /api/gist contract > should match the public many-params response 
     [
       "Content-Type",
       "image/svg+xml",
+    ],
+    [
+      "ETag",
+      ""7c2fd25121a8dc4438c2598853d67744"",
     ],
   ],
 }

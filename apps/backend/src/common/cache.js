@@ -1,5 +1,7 @@
 // @ts-check
 
+import crypto from "node:crypto";
+
 import { clampValue } from "@stats-organization/github-readme-stats-core";
 
 const MIN = 60;
@@ -142,10 +144,45 @@ const setErrorCacheHeaders = (res) => {
   );
 };
 
+/**
+ * Generates an MD5 ETag for response content.
+ *
+ * @param {string} content The response content.
+ * @returns {string} The formatted ETag.
+ */
+const generateETag = (content) => {
+  const hash = crypto.createHash("md5").update(content, "utf8").digest("hex");
+  return `"${hash}"`;
+};
+
+/**
+ * Checks whether the request If-None-Match header matches the content ETag.
+ *
+ * @param {any} req The request object.
+ * @param {string} etag The current content ETag.
+ * @returns {boolean} True if client cache matches.
+ */
+const isFresh = (req, etag) => {
+  const ifNoneMatch = req?.headers?.["if-none-match"];
+  if (!ifNoneMatch) {
+    return false;
+  }
+  return (
+    ifNoneMatch === etag ||
+    ifNoneMatch === `W/${etag}` ||
+    ifNoneMatch
+      .split(",")
+      .map((s) => s.trim())
+      .includes(etag)
+  );
+};
+
 export {
   resolveCacheSeconds,
   setCacheHeaders,
   setErrorCacheHeaders,
+  generateETag,
+  isFresh,
   DURATIONS,
   CACHE_TTL,
 };

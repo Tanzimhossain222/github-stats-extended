@@ -12,8 +12,8 @@ exports[`wakatime API > should parse hide_progress string 'false' as boolean fal
         role="img"
         aria-labelledby="descId"
       >
-        <title id="titleId"></title>
-        <desc id="descId"></desc>
+        <title id="titleId">WakaTime Stats (last 7 days)</title>
+        <desc id="descId">Other: 19 mins, TypeScript: 1 min</desc>
         <style>
           .header {
             font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif;
@@ -200,8 +200,8 @@ exports[`wakatime API > should parse hide_progress string 'true' as boolean true
         role="img"
         aria-labelledby="descId"
       >
-        <title id="titleId"></title>
-        <desc id="descId"></desc>
+        <title id="titleId">WakaTime Stats (last 7 days)</title>
+        <desc id="descId">Other: 19 mins, TypeScript: 1 min</desc>
         <style>
           .header {
             font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif;

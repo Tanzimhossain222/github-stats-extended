@@ -59,8 +59,8 @@ exports[`Test /api/wakatime contract > should match the private non-whitelisted 
 exports[`Test /api/wakatime contract > should match the public happy-path response snapshot 1`] = `
 {
   "content": "<svg width="495" height="195" viewBox="0 0 495 195" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="descId">
-        <title id="titleId"/>
-        <desc id="descId"/>
+        <title id="titleId">WakaTime Stats (last 7 days)</title>
+        <desc id="descId">TypeScript: 12 hrs, JavaScript: 6 hrs 30 mins, Other: 3 hrs, YAML: 1 hr, JSON: 30 mins</desc>
         <style>
           .header {
             font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif;
@@ -236,6 +236,10 @@ exports[`Test /api/wakatime contract > should match the public happy-path respon
       "Content-Type",
       "image/svg+xml",
     ],
+    [
+      "ETag",
+      ""239841452c861731c16fc1d73b4bb492"",
+    ],
   ],
 }
 `;
@@ -243,8 +247,8 @@ exports[`Test /api/wakatime contract > should match the public happy-path respon
 exports[`Test /api/wakatime contract > should match the public inaccessible-profile response snapshot 1`] = `
 {
   "content": "<svg width="495" height="150" viewBox="0 0 495 150" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="descId">
-        <title id="titleId"/>
-        <desc id="descId"/>
+        <title id="titleId">WakaTime Stats</title>
+        <desc id="descId">WakaTime user profile not public</desc>
         <style>
           .header {
             font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif;
@@ -357,6 +361,10 @@ exports[`Test /api/wakatime contract > should match the public inaccessible-prof
       "Content-Type",
       "image/svg+xml",
     ],
+    [
+      "ETag",
+      ""a538fe73c644bdb00ff75f55c43ffb7d"",
+    ],
   ],
 }
 `;
@@ -364,8 +372,8 @@ exports[`Test /api/wakatime contract > should match the public inaccessible-prof
 exports[`Test /api/wakatime contract > should match the public many-params response snapshot 1`] = `
 {
   "content": "<svg width="620" height="140" viewBox="0 0 620 140" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="descId">
-        <title id="titleId"/>
-        <desc id="descId"/>
+        <title id="titleId">a custom title</title>
+        <desc id="descId">TypeScript: 61.88 %, JavaScript: 33.32 %, YAML: 4.76 %</desc>
         <style>
           .header {
             font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif;
@@ -532,6 +540,10 @@ exports[`Test /api/wakatime contract > should match the public many-params respo
     [
       "Content-Type",
       "image/svg+xml",
+    ],
+    [
+      "ETag",
+      ""0e3a88f5d235e0a28dc13e3124b03a3c"",
     ],
   ],
 }

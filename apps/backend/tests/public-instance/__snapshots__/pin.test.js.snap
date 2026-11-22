@@ -59,8 +59,8 @@ exports[`Test /api/pin contract > should match the private non-whitelisted usern
 exports[`Test /api/pin contract > should match the public archived-repo response snapshot 1`] = `
 {
   "content": "<svg width="400" height="150" viewBox="0 0 400 150" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="descId">
-        <title id="titleId"/>
-        <desc id="descId"/>
+        <title id="titleId">convoychat</title>
+        <desc id="descId">Help us take over the world with a deeply customizable React, TypeScript and GraphQL chat app that has enough text to wrap across multiple lines in the repository card.. Language: TypeScript, Stars: 38k, Forks: 100</desc>
         <style>
           .header {
             font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif;
@@ -186,6 +186,10 @@ exports[`Test /api/pin contract > should match the public archived-repo response
       "Content-Type",
       "image/svg+xml",
     ],
+    [
+      "ETag",
+      ""dcecf4a89c0a47706657382e6aba821b"",
+    ],
   ],
 }
 `;
@@ -221,8 +225,8 @@ exports[`Test /api/pin contract > should match the public blacklisted-username r
 exports[`Test /api/pin contract > should match the public happy-path response snapshot 1`] = `
 {
   "content": "<svg width="400" height="150" viewBox="0 0 400 150" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="descId">
-        <title id="titleId"/>
-        <desc id="descId"/>
+        <title id="titleId">convoychat</title>
+        <desc id="descId">Help us take over the world with a deeply customizable React, TypeScript and GraphQL chat app that has enough text to wrap across multiple lines in the repository card.. Language: TypeScript, Stars: 38k, Forks: 100</desc>
         <style>
           .header {
             font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif;
@@ -341,6 +345,10 @@ exports[`Test /api/pin contract > should match the public happy-path response sn
       "Content-Type",
       "image/svg+xml",
     ],
+    [
+      "ETag",
+      ""f3a5a588fd8ca4d64d8abd941c7f1397"",
+    ],
   ],
 }
 `;
@@ -348,8 +356,8 @@ exports[`Test /api/pin contract > should match the public happy-path response sn
 exports[`Test /api/pin contract > should match the public many-params response snapshot 1`] = `
 {
   "content": "<svg width="560" height="233" viewBox="0 0 560 233" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="descId">
-        <title id="titleId"/>
-        <desc id="descId"/>
+        <title id="titleId">anuraghazra/convoychat</title>
+        <desc id="descId">Help us take over the world with a deeply customizable React, TypeScript and GraphQL chat app that has enough text to wrap across multiple lines in the repository card.. Language: TypeScript, Stars: 38k, Forks: 100</desc>
         <style>
           .header {
             font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif;
@@ -513,6 +521,10 @@ exports[`Test /api/pin contract > should match the public many-params response s
     [
       "Content-Type",
       "image/svg+xml",
+    ],
+    [
+      "ETag",
+      ""665ffad7403a43f0b6d9130dfa29c1d2"",
     ],
   ],
 }

@@ -495,6 +495,24 @@ const renderWakatimeCard = (
     `,
   });
 
+  const a11yDesc = filteredLanguages.length
+    ? filteredLanguages
+        .map(
+          (lang) =>
+            `${lang.name}: ${formatLanguageValue({ display_format, lang })}`,
+        )
+        .join(", ")
+    : stats.is_coding_activity_visible
+      ? stats.is_other_usage_visible
+        ? i18n.t("wakatimecard.nocodingactivity")
+        : i18n.t("wakatimecard.nocodedetails")
+      : i18n.t("wakatimecard.notpublic");
+
+  card.setAccessibilityLabel({
+    title: card.title,
+    desc: a11yDesc,
+  });
+
   return card.render(`
     <svg x="0" y="0" width="100%">
       ${finalLayout}

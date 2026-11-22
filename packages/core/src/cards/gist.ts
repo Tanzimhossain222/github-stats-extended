@@ -175,6 +175,11 @@ const renderGistCard = (
   }
   card.setHideBorder(hide_border);
 
+  card.setAccessibilityLabel({
+    title: card.title,
+    desc: `${desc}. Language: ${languageName}, Stars: ${totalStars}, Forks: ${totalForks}`,
+  });
+
   return card.render(`
     ${descriptionSvg}
 

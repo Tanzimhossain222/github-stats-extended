@@ -347,6 +347,14 @@ describe("Test renderTopLanguages helper functions", () => {
       langs: [langs.HTML, langs.css],
       totalLanguageSize: 300,
     });
+    const langsWithMicro = {
+      ...langs,
+      python: { name: "Python", size: 5, color: "#3572A5", count: 1 },
+    };
+    expect(trimTopLanguages(langsWithMicro, 10, undefined, 1)).toStrictEqual({
+      langs: [langs.HTML, langs.javascript, langs.css],
+      totalLanguageSize: 500,
+    });
   });
 
   it("getDefaultLanguagesCountByLayout", () => {
@@ -870,6 +878,28 @@ describe("Test renderTopLanguages", () => {
     expect(pies).toHaveLength(1);
     expect(pies[0]).toHaveAttribute("size", "100");
     expect(pies[0]?.tagName).toBe("circle");
+  });
+
+  it("should filter out languages below min_percent", () => {
+    const testLangs = {
+      ...langs,
+      micro: { name: "MicroLang", size: 2, color: "#000", count: 1 },
+    };
+    document.body.innerHTML = renderTopLanguages(testLangs, { min_percent: 1 });
+    expect(screen.queryByText(/MicroLang/i)).not.toBeInTheDocument();
+    expect(screen.getAllByText(/JavaScript/i).length).toBeGreaterThan(0);
+  });
+
+  it("should render WCAG accessibility title and desc labels", () => {
+    document.body.innerHTML = renderTopLanguages(langs);
+    const title = document.querySelector("title#titleId");
+    const desc = document.querySelector("desc#descId");
+    expect(title).toBeInTheDocument();
+    expect(title?.textContent).toBe("Most Used Languages");
+    expect(desc).toBeInTheDocument();
+    expect(desc?.textContent).toContain("javascript 40.00%");
+    expect(desc?.textContent).toContain("HTML 40.00%");
+    expect(desc?.textContent).toContain("css 20.00%");
   });
 });
 

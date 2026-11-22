@@ -17,6 +17,8 @@ import { default as wakatimeProxy } from "./api/wakatime-proxy.js";
 import { guardAccess } from "./src/common/access.js";
 import {
   CACHE_TTL,
+  generateETag,
+  isFresh,
   resolveCacheSeconds,
   setCacheHeaders,
   setErrorCacheHeaders,
@@ -59,6 +61,41 @@ const getUserPat = async (username) => {
   return userAccess.token;
 };
 
+const sendCardResponse = async (req, res, result, cacheConfig) => {
+  if (result.status === "error - temporary") {
+    setErrorCacheHeaders(res);
+  } else {
+    const cacheSeconds = resolveCacheSeconds({
+      requested: parseInt(req.query.cache_seconds, 10),
+      def: cacheConfig.DEFAULT,
+      min: cacheConfig.MIN,
+      max: cacheConfig.MAX,
+    });
+    setCacheHeaders(res, cacheSeconds);
+  }
+
+  res.setHeader("Content-Type", "image/svg+xml");
+
+  if (result.content && result.status === "success") {
+    const etag = generateETag(result.content);
+    res.setHeader("ETag", etag);
+
+    if (isFresh(req, etag)) {
+      res.statusCode = 304;
+      res.end();
+      if (result.status !== "error - permanent") {
+        await storeRequest(req);
+      }
+      return;
+    }
+  }
+
+  res.end(result.content);
+  if (result.status !== "error - permanent") {
+    await storeRequest(req);
+  }
+};
+
 export default async (req, res) => {
   const url = new URL(req.url, "https://localhost");
 
@@ -71,44 +108,14 @@ export default async (req, res) => {
         const userPat = await getUserPat(req.query.username);
         result = await api(req.query, userPat);
       }
-      if (result.status === "error - temporary") {
-        setErrorCacheHeaders(res);
-      } else {
-        const cacheSeconds = resolveCacheSeconds({
-          requested: parseInt(req.query.cache_seconds, 10),
-          def: CACHE_TTL.STATS_CARD.DEFAULT,
-          min: CACHE_TTL.STATS_CARD.MIN,
-          max: CACHE_TTL.STATS_CARD.MAX,
-        });
-        setCacheHeaders(res, cacheSeconds);
-      }
-      res.setHeader("Content-Type", "image/svg+xml");
-      res.end(result.content);
-      if (result.status !== "error - permanent") {
-        await storeRequest(req);
-      }
+      await sendCardResponse(req, res, result, CACHE_TTL.STATS_CARD);
       break;
     }
     case "/api/gist":
       result =
         getGuardResult(req.query, "gist", req.query.id) ??
         (await gist(req.query));
-      if (result.status === "error - temporary") {
-        setErrorCacheHeaders(res);
-      } else {
-        const cacheSeconds = resolveCacheSeconds({
-          requested: parseInt(req.query.cache_seconds, 10),
-          def: CACHE_TTL.GIST_CARD.DEFAULT,
-          min: CACHE_TTL.GIST_CARD.MIN,
-          max: CACHE_TTL.GIST_CARD.MAX,
-        });
-        setCacheHeaders(res, cacheSeconds);
-      }
-      res.setHeader("Content-Type", "image/svg+xml");
-      res.end(result.content);
-      if (result.status !== "error - permanent") {
-        await storeRequest(req);
-      }
+      await sendCardResponse(req, res, result, CACHE_TTL.GIST_CARD);
       break;
     case "/api/pin": {
       result = getGuardResult(req.query, "username", req.query.username);
@@ -116,22 +123,7 @@ export default async (req, res) => {
         const userPat = await getUserPat(req.query.username);
         result = await pin(req.query, userPat);
       }
-      if (result.status === "error - temporary") {
-        setErrorCacheHeaders(res);
-      } else {
-        const cacheSeconds = resolveCacheSeconds({
-          requested: parseInt(req.query.cache_seconds, 10),
-          def: CACHE_TTL.PIN_CARD.DEFAULT,
-          min: CACHE_TTL.PIN_CARD.MIN,
-          max: CACHE_TTL.PIN_CARD.MAX,
-        });
-        setCacheHeaders(res, cacheSeconds);
-      }
-      res.setHeader("Content-Type", "image/svg+xml");
-      res.end(result.content);
-      if (result.status !== "error - permanent") {
-        await storeRequest(req);
-      }
+      await sendCardResponse(req, res, result, CACHE_TTL.PIN_CARD);
       break;
     }
     case "/api/top-langs": {
@@ -140,44 +132,14 @@ export default async (req, res) => {
         const userPat = await getUserPat(req.query.username);
         result = await topLangs(req.query, userPat);
       }
-      if (result.status === "error - temporary") {
-        setErrorCacheHeaders(res);
-      } else {
-        const cacheSeconds = resolveCacheSeconds({
-          requested: parseInt(req.query.cache_seconds, 10),
-          def: CACHE_TTL.TOP_LANGS_CARD.DEFAULT,
-          min: CACHE_TTL.TOP_LANGS_CARD.MIN,
-          max: CACHE_TTL.TOP_LANGS_CARD.MAX,
-        });
-        setCacheHeaders(res, cacheSeconds);
-      }
-      res.setHeader("Content-Type", "image/svg+xml");
-      res.end(result.content);
-      if (result.status !== "error - permanent") {
-        await storeRequest(req);
-      }
+      await sendCardResponse(req, res, result, CACHE_TTL.TOP_LANGS_CARD);
       break;
     }
     case "/api/wakatime":
       result =
         getGuardResult(req.query, "wakatime", req.query.username) ??
         (await wakatime(req.query));
-      if (result.status === "error - temporary") {
-        setErrorCacheHeaders(res);
-      } else {
-        const cacheSeconds = resolveCacheSeconds({
-          requested: parseInt(req.query.cache_seconds, 10),
-          def: CACHE_TTL.WAKATIME_CARD.DEFAULT,
-          min: CACHE_TTL.WAKATIME_CARD.MIN,
-          max: CACHE_TTL.WAKATIME_CARD.MAX,
-        });
-        setCacheHeaders(res, cacheSeconds);
-      }
-      res.setHeader("Content-Type", "image/svg+xml");
-      res.end(result.content);
-      if (result.status !== "error - permanent") {
-        await storeRequest(req);
-      }
+      await sendCardResponse(req, res, result, CACHE_TTL.WAKATIME_CARD);
       break;
     case "/api/wakatime-proxy":
       await wakatimeProxy(req, res);

@@ -87,8 +87,8 @@ exports[`Test /api/top-langs contract > should match the public blacklisted-user
 exports[`Test /api/top-langs contract > should match the public happy-path response snapshot 1`] = `
 {
   "content": "<svg width="300" height="285" viewBox="0 0 300 285" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="descId">
-        <title id="titleId"/>
-        <desc id="descId"/>
+        <title id="titleId">Most Used Languages</title>
+        <desc id="descId">Rust 70.92%, HTML 12.77%, JavaScript 8.51%, TypeScript 6.38%, Java 1.42%</desc>
         <style>
           .header {
             font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif;
@@ -263,6 +263,10 @@ exports[`Test /api/top-langs contract > should match the public happy-path respo
       "Content-Type",
       "image/svg+xml",
     ],
+    [
+      "ETag",
+      ""5d47af76ddb46b5eb0ca0c624c3f2f5e"",
+    ],
   ],
 }
 `;
@@ -270,8 +274,8 @@ exports[`Test /api/top-langs contract > should match the public happy-path respo
 exports[`Test /api/top-langs contract > should match the public many-params response snapshot 1`] = `
 {
   "content": "<svg width="420" height="110" viewBox="0 0 420 110" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="descId">
-        <title id="titleId"/>
-        <desc id="descId"/>
+        <title id="titleId">Most Used Languages</title>
+        <desc id="descId">TypeScript 19.0 B, Java 4.5 B, Python 3.9 B</desc>
         <style>
           .header {
             font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif;
@@ -421,6 +425,10 @@ exports[`Test /api/top-langs contract > should match the public many-params resp
     [
       "Content-Type",
       "image/svg+xml",
+    ],
+    [
+      "ETag",
+      ""365aeb5fcb5a236228d392bb0b970601"",
     ],
   ],
 }

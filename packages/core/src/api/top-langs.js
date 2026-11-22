@@ -31,6 +31,7 @@ export default async (
     hide_progress,
     hide_values,
     stats_format,
+    min_percent,
     ...remainingParams
   },
   pat = null,
@@ -127,6 +128,8 @@ export default async (
         hide_progress: parseBoolean(hide_progress),
         hide_values: parseBoolean(hide_values),
         stats_format,
+        min_percent:
+          min_percent === undefined ? undefined : parseFloat(min_percent),
       }),
     };
   } catch (err) {

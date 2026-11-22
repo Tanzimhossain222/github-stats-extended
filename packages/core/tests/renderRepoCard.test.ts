@@ -422,6 +422,19 @@ describe("Test renderRepoCard", () => {
     const styles = document.querySelector("style")?.textContent ?? "";
     expect(styles).not.toContain("animation-duration: 0s !important");
   });
+
+  it("should render WCAG accessibility title and desc labels", () => {
+    document.body.innerHTML = renderRepoCard(data_repo.repository);
+
+    const title = document.querySelector("title#titleId");
+    const desc = document.querySelector("desc#descId");
+    expect(title).toBeInTheDocument();
+    expect(title?.textContent).toBe("convoychat");
+    expect(desc).toBeInTheDocument();
+    expect(desc?.textContent).toContain("Language: TypeScript");
+    expect(desc?.textContent).toContain("Stars: 38k");
+    expect(desc?.textContent).toContain("Forks: 100");
+  });
 });
 
 describe("test pin API", () => {
